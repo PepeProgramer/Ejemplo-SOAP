@@ -9,17 +9,16 @@ import com.mkyong.ws.HelloWorld;
 public class HelloWorldClient{
  
 	public static void main(String[] args) throws Exception {
-        //Create a web service client to access your published service.
-        //First, client send a wsdl request to service endpoint
-        /*A second call, client put method invoke request in SOAP envelope and send it to service endpoint.
-        At the service endpoint, call the requested method and put the result in a SOAP envelope and send it back to client.*/
         Scanner sc = new Scanner(System.in);
 		URL url = new URL("http://localhost:9999/ws/hello?wsdl");
  
-        //1st argument service URI, refer to wsdl document above
-		//2nd argument is service name, refer to wsdl document above
+        //El primer argumento es la uri del servicio
+		//2º argumento es el nombre del servicio, se refiere al espacio de nombres
         QName qname = new QName("http://ws.mkyong.com/", "HelloWorldImplService");
- 
+		
+		//Primero, el cliente envia una peticion wsdl al "service endpoint"
+        /*En una segunda llamada, Método de solicitud de invocación del cliente en un sobre SOAP y lo envía al "service endpoint".
+        Éste llama al método requerido y  pone el resultado en un "sobre" SOAP que es enviado al cliente.*/
         Service service = Service.create(url, qname);
  
         HelloWorld hello = service.getPort(HelloWorld.class);
